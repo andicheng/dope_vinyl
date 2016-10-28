@@ -88,7 +88,7 @@
               <tr>
                 <td><span id="artist_name">{{key.artist.name}}</span> - {{key.title}}</td>
                 <td>${{key.price}}</td>
-                <td>{{value}} ___<a href="#">update</a> <a href="#">delete</a></td>
+                <td>{{value}} ___<a href="#">update</a> <a href="/deletecart_item">delete</a></td>
                 <td>${{price}}</td>
               </tr>
               {% endfor %}
@@ -99,6 +99,7 @@
 
 
         <form class="" action="/billing_shipping" method="POST">
+<<<<<<< HEAD
         <div id="shipping">
             <h4 class="h4">Shipping Information</h4>
               {% csrf_token %}
@@ -132,5 +133,35 @@
                 </script>
         </div>
         </form>
+=======
+          {% csrf_token %}
+            <label>First Name: <input type="text" name="ship_first_name"></label>
+            <label>Last Name: <input type="text" name="ship_last_name"></label>
+            <label>Address: <input type="text" name="ship_address1"></label>
+            <label>Address 2: <input type="text" name="ship_address2"></label>
+            <label>City: <input type="text" name="ship_city"></label>
+            <label>State: <input type="text" name="ship_state"></label>
+            <label>Zipcode: <input type="text" name="ship_zip"></label>
+        <h4>Billing Information</h4>
+        <label><input type="checkbox" name="same_as_shipping"> Same as Shipping</label>
+            <label>First Name: <input type="text" name="bill_first_name"></label>
+            <label>Last Name: <input type="text" name="bill_last_name"></label>
+            <label>Address: <input type="text" name="bill_address1"></label>
+            <label>Address 2: <input type="text" name="bill_address2"></label>
+            <label>City: <input type="text" name="bill_city"></label>
+            <label>State: <input type="text" name="bill_state"></label>
+            <label>Zipcode: <input type="text" name="bill_zip"></label>
+            <br>
+            <script
+              src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="pk_test_oM6TfazDfjAN0q5LsbbdsQ0L"
+              data-amount="{{total}} "
+              data-name="Dope Vinyl"
+              data-description="Purchasing a Record"
+              data-image="http://i.ebayimg.com/00/s/NjkzWDY5Mw==/z/pnwAAMXQUmFSnGv5/$_12.JPG?set_id=880000500F"
+              data-locale="auto">
+            </script>
+          </form>
+>>>>>>> 7fe2e6efd6493554c27228bbaad24ed7cbb60e10
     </body>
 </html>
