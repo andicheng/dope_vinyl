@@ -1,12 +1,23 @@
 html {
-    width: 960px;
+    width: 1336px;
     margin: auto;
     font-family: helvetica;
 }
 
-h1 {
-    text-align: left;
+#h1 {
+    text-align: center;
+    margin-top: 200px;
 }
+
+    #logo {
+        font-family: 'Pacifico', cursive;
+        font-size: 48px;
+    }
+
+    form {
+        margin-top: 50px;
+        margin-left: 250px;
+    }
 
     label {
         display: block;
@@ -19,7 +30,6 @@ h1 {
     }
 
     #submit_button {
-        margin: 0px;
-        margin-top: 10px;
-        padding: 5px 55px;
+        margin: 10px 0px 0px 685px;
+        padding: 10px 55px;
     }

@@ -19,24 +19,26 @@
         </div>
         <div id="content">
             <div id="address">
+              {% for order in customerorder %}
                 <h6>Order ID: {{order.id}}</h6>
                 <div class='address'>
                     <h6>Customer Shipping Info:</h6>
-                    <p>Name: {{ship_info.first_name}}</p>
-                    <p>Address: {{ship_info.address1}}</p>
-                    <p>City: {{ship_info.city}}</p>
-                    <p>State: {{ship_info.state}}</p>
-                    <p>Zip: {{ship_info.zip}}</p>
+                    <p>Name: {{order.orders.shipping.ship_first_name}}</p>
+                    <p>Address: {{order.orders.shipping.ship_address1}}</p>
+                    <p>City: {{order.orders.shipping.ship_city}}</p>
+                    <p>State: {{order.orders.shipping.ship_state}}</p>
+                    <p>Zip: {{order.orders.shipping.ship_zip}}</p>
                 </div>
                 <div class="address">
                     <h6>Customer Billing Info:</h6>
-                    <p>Name: {{ship_info.first_name}}</p>
-                    <p>Address: {{ship_info.address1}}</p>
-                    <p>City: {{ship_info.city}}</p>
-                    <p>State: {{ship_info.state}}</p>
-                    <p>Zip: {{ship_info.zip}}</p>
+                    <p>Name: {{order.orders.billing.bill_first_name}}</p>
+                    <p>Address: {{order.orders.billing.bill_address1}}</p>
+                    <p>City: {{order.orders.billing.bill_city}}</p>
+                    <p>State: {{order.orders.billing.bill_state}}</p>
+                    <p>Zip: {{order.orders.billing.bill_zip}}</p>
+                </div>
+                {% endfor %}
             </div>
-        </div>
          <div id='order'>
             <table>
                <tr>
@@ -46,29 +48,24 @@
                   <th>Quantity</th>
                   <th>Total</th>
                </tr>
+               {% for product in products_in_order %}
                <tr>
-                  <td>1</td>
-                  <td>Tom Petty and the Heartbreakers</td>
-                  <td>Tom Petty and the Heartbreakers</td>
-                  <td>1</td>
-                  <td>$19.99</td>
-               </tr>
-               {% for product in products %}
-               <tr>
-                  <td>{{product.id}}</td>
-                  <td>{{product.title}}</td>
-                  <td>{{product.price}}</td>
-                  <td>{{product.order.quantity}}</td>
-                  <td>${{product.price}}*{{product.order.quantity}}</td>
+                  <td>{{product.products.id}}</td>
+                  <td>{{product.products.title}}</td>
+                  <td>{{product.products.price}}</td>
+                  <td>{{product.quantity}}</td>
+                  <td>${{product.products.price}}*{{product.products.quantity}}</td>
                </tr>
                {% endfor %}
             </table>
             <div id="lower_order">
+              {% for product in products_in_order %}
             <p id="status">Status: {{order.status}}</p>
                 <div id="charges">
-                   <p>Sub total: ${{product.price}}*{{product.order.quantity}}</p>
-                   <p>Shipping: ${{order.shipping}}</p>
-                   <p>Total Price: ${{product.price}}*{{product.order.quantity}}+{{order.shipping}}</p>
+                   <p>Sub total: ${{product.products.price}}*{{product.products.order.quantity}}</p>
+                   <p>Shipping: ${{product.products.order.shipping}}</p>
+                   <p>Total Price: ${{product.products.price}}*{{product.products.order.quantity}}+{{product.order.shipping}}</p>
+              {% endfor %}
                 </div>
             </div>
         </div>

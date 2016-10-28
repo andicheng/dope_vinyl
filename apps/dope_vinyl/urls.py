@@ -33,7 +33,4 @@ urlpatterns = [
     url(r'^dashboard/orders$', views.orders),
     url(r'^dashboard/orders/show/(?P<id>\d+)$', views.show_orders),
 
-
-
-
 ]

@@ -1,5 +1,5 @@
 html {
-    width: 960px;
+    width: 1336px;
     margin: auto;
     font-family: helvetica;
 }
@@ -7,13 +7,16 @@ html {
 #nav_bar {
     background-color: #565656;
     color: white;
-    margin-bottom: 25px;
 }
 
-    h3 {
+    #h3 {
+        font-family: 'Pacifico', cursive;
         display: inline-block;
+        margin-top: 15px;
         margin-left: 25px;
-        margin-right: 610px;
+        margin-right: 1075px;
+        padding-bottom: 10px;
+        font-size: 34px;
     }
 
     #nav_bar a {
@@ -25,24 +28,29 @@ html {
     }
 
 #go_back {
-    margin-left: 25px;
+    margin-left: 100px;
+    margin-top: 50px;
+    font-size: 20px;
 }
 
-h2 {
-    margin-left: 25px;
+#h2 {
+    margin-top: 5px;
+    margin-left: 100px;
 }
 
 #thumbnail {
     display: inline-block;
-    margin-left: 25px;
-    width: 300px;
-    height: 300px;
+    margin-top: 15px;
+    margin-left: 100px;
+    width: 500px;
+    height: 500px;
 }
 
 #content {
     display: inline-block;
     vertical-align: top;
-    width: 500px;
+    margin-top: 15px;
+    width: 700px;
 }
 
     #content_description {
@@ -72,20 +80,21 @@ h2 {
       color: white;
    }
 
-h4 {
-    margin-left: 25px;
+#h4 {
+    margin-top: 25px;
+    margin-left: 100px;
     padding: 0px;
 }
 
 ul {
-    margin-left: 35px;
+    margin-top: 25px;
+    margin-left: 100px;
     padding: 0px;
-   margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 li {
-    border: 1px solid black;
-    display: inline-block;;
+    display: inline-block;
     list-style: none;
     width: 120px;
     height: 120px;
@@ -106,3 +115,6 @@ img#similar{
    text-decoration: none;
    color: black;
 }
+
+#buy {
+    padding: 10px 28px;

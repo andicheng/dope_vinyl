@@ -18,18 +18,20 @@
         <a id="logoff" href="/adminlogout">log off</a>
     </div>
 
-    <form id="search_form" action="" method="Post">
+    <form id="search_form" action="" method="GET">
+        {% csrf_token %}
         <input id="search_bar" type='search' name="search" placeholder="Search">
     </form>
-    <form name="prod_filter" id="dropdown"  method="POST">
-   {% csrf_token %}
-        <select name="prod_filter" onchange="form.submit()">
-           <option value="showall" {% if prod_filter == 'showall' %}selected{% endif %}>Show All</option>
-           <option value="Order in Process" {% if prod_filter == 'Order in Process' %}selected{% endif %}>Order in Process</option>
-           <option value="cancelled" {% if prod_filter == 'cancelled' %}selected{% endif %}>Cancelled</option>
-           <option value="shipped" {% if prod_filter == 'shipped' %}selected{% endif %}>Shipped</option>
+    <form name="pfilter" id="select_form"  method="POST">
+        {% csrf_token %}
+        <select name="pfilter" id="dropdown" class="custom-select" onchange="form.submit()">
+            <option value="showall" {% if prod_filter == 'showall' %}selected{% endif %}>Show All</option>
+            <option value="Order In Process" {% if prod_filter == 'Order In Process' %}selected{% endif %}>Order In Process</option>
+            <option value="Cancelled" {% if prod_filter == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+            <option value="Shipped" {% if prod_filter == 'Shipped' %}selected{% endif %}>Shipped</option>
         </select>
     </form>
+
      <!-- testing ... -->
      {% if messages %}
        {% for msg in messages %}

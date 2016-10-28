@@ -5,6 +5,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import stripe
 ###################################### USER ####################################################
 def home(request):
+
     return render(request, "dope_vinyl/home.html")
 
 def front_allproducts(request):
@@ -21,6 +22,7 @@ def front_allproducts(request):
             products = Product.objects.all().order_by(sort)
     else:
         products = Product.objects.all().order_by(sort)
+
     paginator = Paginator(products,15)
     page = request.GET.get('page')
     try:
@@ -63,9 +65,11 @@ def front_allproducts_cat(request, id):
     genres = Genre.objects.filter(id=id)
     context = {
         'products' : products,
+        'sort_current' : sort,
         'genres' : genres,
     }
     return render(request, "dope_vinyl/front_allproducts.html", context)
+
 def front_productpage(request, id):
     cart = request.session.get('cart', {})
     length = sum(cart.values())
@@ -129,12 +133,13 @@ def deletecart_item(request, key_id):
     return redirect('/carts')
 
 def billing_shipping(request):
+
     if request.method == "POST":
         stripe.api_key = "sk_test_MtYKfrdjHXRPAAuSul1W5m5B"
         token = request.POST['stripeToken']
         try:
             charge = stripe.Charge.create(
-                amount=1,
+                amount=1000,
                 currency="USD",
                 source=token,
                 description="Example charge"
@@ -175,7 +180,6 @@ def checkout(request):
     return redirect('/front_allproducts')
        # return redirect('/carts')
        #after testing route back to all products page
-
 ###################################### ADMIN ###################################################
 def admin(request):
     return render(request, "dope_vinyl/adminlogin.html")
@@ -209,42 +213,45 @@ def orders(request):
         return redirect('/adminlogin')
 
     try:
-        sort=request.POST['sort']
+        pfilter=request.POST['pfilter']
     except:
-        sort = 'title'
+        pfilter = 'showall'
+
     if request.method=='GET':
         try:
-            products = Product.objects.filter(title__contains=request.GET['search_title'])
+            orders = Order.objects.filter(billing__bill_first_name__contains=request.GET['search']).order_by("-id") | Order.objects.filter(billing__bill_address1__contains=request.GET['search']).order_by("-id") | Order.objects.filter(status__contains=request.GET['search']).order_by("-id") | Order.objects.filter(total__contains=request.GET['search']).order_by("-id") | Order.objects.filter(id__contains=request.GET['search']).order_by("-id")
         except:
-            products = Product.objects.all().order_by(sort)
+            if pfilter == 'showall':
+                orders = Order.objects.all().order_by("-id")
+            else:
+                orders = Order.objects.filter(status=pfilter).order_by("-id")
     else:
-        products = Product.objects.all().order_by(sort)
-    # if request.method == "POST" & request.POST['prod_filter']=="showall":
-    #     orders = Order.objects.all()
-    #     prod_filter="showall"
-    # else:
-    #     prod_filter=request.POST['prod_filter']
-        # orders = Order.objects.filter(status=prod_filter)
-    orders = Order.objects.all().order_by("-id")
+        if pfilter == 'showall':
+            orders = Order.objects.all().order_by("-id")
+        else:
+            orders = Order.objects.filter(status=pfilter).order_by("-id")
 
     context = {
         'admin': Admin.objects.get(id=request.session['logged_admin']),
         'orders': orders,
-        # 'prod_filter' : prod_filter,
+        'prod_filter' : pfilter,
     }
-
     return render(request, 'dope_vinyl/dashboard_allorders.html', context)
-
 
 #INDIVIDUAL ORDER ON ADMIN PAGE.
 def show_orders(request, id):
     if 'logged_admin' not in request.session:
         messages.error(request, "Gotta login bro")
         return redirect('/adminlogin')
-
+    customerorder = Product_orders.objects.filter(id=id)
+    products_in_order = Product_orders.objects.filter(orders=id)
+    print customerorder.query
     context = {
-        'admin': Admin.objects.get(id=request.session['logged_admin'])
+        'admin' : Admin.objects.get(id=request.session['logged_admin']),
+        'customerorder' : customerorder,
+        'products_in_order' : products_in_order
     }
+
     return render(request, 'dope_vinyl/dashboard_showorder.html', context)
 
 #ALL PRODUCTS ON ADMIN PAGE. CLICK ON ADD NEW PRODUCT TO TAKE YOU TO ADD/EDIT ROUTE.
@@ -253,8 +260,19 @@ def products(request):
     if 'logged_admin' not in request.session:
         messages.error(request, "Gotta login bro")
         return redirect('/adminlogin')
-    all_products = Product.objects.all().order_by('-id')
+
+    if request.method=='GET':
+        try:
+            all_products = Product.objects.filter(title__contains=request.GET['search_title']) | Product.objects.filter(artist__name__contains=request.GET['search_title'])
+        except:
+            all_products = Product.objects.all().order_by('-id')
+    else:
+        all_products = Product.objects.all().order_by('-id')
+
     all_genres = Genre.objects.filter()
+    total_orders = Product_orders.objects.filter()
+
+    print total_orders.values()
 
     context = {
         "all_products": all_products,

@@ -18,9 +18,9 @@
         <a id="logoff" href="/adminlogout">log off</a>
     </div>
 
-    <form id="search_form" action="" method="POST">
+    <form id="search_form" action="" method="GET">
         {% csrf_token %}
-        <input id="search_bar" type='search' name="search_title" placeholder="Search by Artist">
+        <input id="search_bar" type='search' name="search_title" placeholder="Search by Artist or Title">
         <input class="btn btn-danger" type="submit" value="Search">
     </form>
 
