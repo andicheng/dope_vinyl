@@ -1,5 +1,5 @@
 html {
-    width: 960px;
+    width: 1336px;
     margin: auto;
     font-family: helvetica;
 }
@@ -9,10 +9,14 @@ html {
     color: white;
 }
 
-    h3 {
+    #h3 {
+        font-family: 'Pacifico', cursive;
         display: inline-block;
+        margin-top: 15px;
         margin-left: 25px;
-        margin-right: 610px;
+        margin-right: 1075px;
+        padding-bottom: 10px;
+        font-size: 34px;
     }
 
     #nav_bar a {
@@ -25,7 +29,8 @@ html {
 
 table {
     width:100%;
-    border: 3px solid black;
+    border-style: solid;
+    border-color: grey;
     margin-top: 25px;
 }
 
@@ -42,29 +47,53 @@ table {
         margin: 0px;
     }
 
-    h5 {
+    #h5 {
         text-align: right;
-        font-size: 16px;
+        font-size: 24px;
+        font-weight: bold;
         padding: 0px;
-        margin: 20px 0px 5px 0px;
+        margin: 20px 2px 5px 0px;
     }
 
     #continue_shopping_button {
         text-align: right;
-        margin-left: 805px;
+        margin-left: 1187px;
 }
 
-h4 {
+.h4 {
+    display: block;
     font-size: 20px;
     margin-left: 0px;
 }
 
-label {
+.label {
     display: block;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
 input {
-    border: 1px solid black;
+    border: 1px solid grey;
+    padding-right: 200px;
+}
+
+#billing {
+    display: inline-block;
+    width: 450px;
+}
+
+#shipping {
+    display: inline-block;
+    vertical-align: top;
+    width: 450px;
+    margin-left: 15px;
+}
+
+#checkbox {
+    display: inline-block;
+}
+
+.stripe-button-el{
+    margin-top: 0px;
+    margin-left: 266px;
 }

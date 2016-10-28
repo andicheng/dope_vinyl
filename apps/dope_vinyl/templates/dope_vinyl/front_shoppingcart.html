@@ -6,9 +6,13 @@
         <title>All Products</title>
         <!-- <link rel="stylesheet" href="./../css/front_shoppingcart.css" media="screen" title="no title"> -->
         <link rel="stylesheet" href="{% static '/dope_vinyl/css/front_shoppingcart.css' %}" media="screen" title="no title">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
         <script type="text/javascript" src ='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
-    		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    		<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
         <script type="text/javascript">
           Stripe.setPublishableKey('pk_test_oM6TfazDfjAN0q5LsbbdsQ0L');
@@ -69,8 +73,8 @@
     </head>
     <body>
         <div id="nav_bar">
-            <h3>Dope Vinyl</h3>
-            <a href="/carts">Shopping Cart ( {{length}} )</a>
+            <h3 id="h3">Dope.</h3>
+            <a href="/carts">Shopping Cart ({{length}})</a>
         </div>
         <div id="order_list">
             <table>
@@ -89,14 +93,11 @@
               </tr>
               {% endfor %}
             </table>
-            <h5>Total: ${{total}}</h5>
+            <h5 id="h5">Total: ${{total}}</h5>
             <a id="continue_shopping_button" href="/front_allproducts">Continue Shopping</a>
         </div>
 
-        <h4>Shipping Information</h4>
         <form class="" action="/billing_shipping" method="POST">
-<<<<<<< HEAD
-<<<<<<< HEAD
         <div id="shipping">
             <h4 class="h4">Shipping Information</h4>
               {% csrf_token %}
@@ -129,45 +130,5 @@
                     data-locale="auto">
                 </script>
         </div>
-        </form>
-=======
-=======
->>>>>>> parent of 5346222... styled all the pages now so it's uniformed.
-          {% csrf_token %}
-            <label>First Name: <input type="text" name="ship_first_name"></label>
-            <label>Last Name: <input type="text" name="ship_last_name"></label>
-            <label>Address: <input type="text" name="ship_address1"></label>
-            <label>Address 2: <input type="text" name="ship_address2"></label>
-            <label>City: <input type="text" name="ship_city"></label>
-            <label>State: <input type="text" name="ship_state"></label>
-            <label>Zipcode: <input type="text" name="ship_zip"></label>
-        <h4>Billing Information</h4>
-        <label><input type="checkbox" name="same_as_shipping"> Same as Shipping</label>
-            <label>First Name: <input type="text" name="bill_first_name"></label>
-            <label>Last Name: <input type="text" name="bill_last_name"></label>
-            <label>Address: <input type="text" name="bill_address1"></label>
-            <label>Address 2: <input type="text" name="bill_address2"></label>
-            <label>City: <input type="text" name="bill_city"></label>
-            <label>State: <input type="text" name="bill_state"></label>
-            <label>Zipcode: <input type="text" name="bill_zip"></label>
-            <br>
-            <script
-              src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-              data-key="pk_test_oM6TfazDfjAN0q5LsbbdsQ0L"
-<<<<<<< HEAD
-              data-amount="{{total}} "
-=======
-              data-amount="{{total}}"
->>>>>>> parent of 5346222... styled all the pages now so it's uniformed.
-              data-name="Dope Vinyl"
-              data-description="Purchasing a Record"
-              data-image="http://i.ebayimg.com/00/s/NjkzWDY5Mw==/z/pnwAAMXQUmFSnGv5/$_12.JPG?set_id=880000500F"
-              data-locale="auto">
-            </script>
-          </form>
-<<<<<<< HEAD
->>>>>>> 7fe2e6efd6493554c27228bbaad24ed7cbb60e10
-=======
->>>>>>> parent of 5346222... styled all the pages now so it's uniformed.
     </body>
 </html>
