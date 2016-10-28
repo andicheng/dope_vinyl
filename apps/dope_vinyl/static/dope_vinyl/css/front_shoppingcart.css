@@ -1,5 +1,5 @@
 html {
-    width: 960px;
+    width: 1336px;
     margin: auto;
     font-family: helvetica;
 }
@@ -9,10 +9,14 @@ html {
     color: white;
 }
 
-    h3 {
+    #h3 {
+        font-family: 'Pacifico', cursive;
         display: inline-block;
-        margin-left: 25px;
-        margin-right: 610px;
+        margin-top: 15px;
+        margin-bottom: 25px;
+        margin-left: 50px;
+        margin-right: 1050px;
+        font-size: 30px;
     }
 
     #nav_bar a {
@@ -42,29 +46,52 @@ table {
         margin: 0px;
     }
 
-    h5 {
+    #artist_name {
+        font-weight: bold;
+    }
+
+    #h5 {
         text-align: right;
-        font-size: 16px;
+        font-size: 20px;
         padding: 0px;
-        margin: 20px 0px 5px 0px;
+        margin: 20px 5px 5px 0px;
     }
 
     #continue_shopping_button {
         text-align: right;
-        margin-left: 805px;
+        margin-left: 1185px;
 }
 
-h4 {
+#shipping {
+    display: inline-block;
+    margin-right: 100px;
+}
+
+#billing {
+    display: inline-block;
+    vertical-align: top;
+}
+
+    #checkbox {
+        margin-top: 0px;
+    }
+
+    #same_as_shipping {
+        margin-top: 0px;
+        width: 20px;
+    }
+
+.h4 {
     font-size: 20px;
     margin-left: 0px;
 }
 
-label {
+.label {
     display: block;
     font-weight: bold;
-    margin-bottom: 10px;
 }
 
 input {
-    border: 1px solid black;
+    border: 1px solid grey;
+    width: 300px;
 }

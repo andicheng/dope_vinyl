@@ -20,6 +20,7 @@ html {
     display: inline-block;
     margin: 0px 10px 0px 15px;
     padding: 0px;
+    font-size: 30px;
     }
 
     #header a{
@@ -60,8 +61,8 @@ html {
 
 table {
     border-style: solid;
-    border-color: #e2e2e2;
-    margin-top: 50px;
+    border-color: grey;
+    margin-top: 25px;
     width: 1200px;
     margin-left: 62px;
     margin-bottom: 100px;

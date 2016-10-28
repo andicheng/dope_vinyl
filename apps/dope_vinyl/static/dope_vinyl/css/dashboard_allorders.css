@@ -20,6 +20,7 @@ html {
     display: inline-block;
     margin: 0px 10px 0px 15px;
     padding: 0px;
+    font-size: 30px;
     }
 
     #header a{
@@ -77,7 +78,7 @@ table {
     }
 
     th:nth-child(3) {
-        width: 150px;
+        width: 250px;
         padding: 5px 0px;
     }
 
@@ -107,7 +108,7 @@ table {
     }
 
     td:nth-child(3) {
-        width: 150px;
+        width: 250px;
         padding: 20px 0px;
     }
 

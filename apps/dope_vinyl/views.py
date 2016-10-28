@@ -1,10 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
-<<<<<<< HEAD
 from .models import Product, Genre, Artist, Admin, Order, Billing, Shipping, Product_orders
-=======
-from .models import Product, Genre, Artist, Admin, Order, Shipping, Billing
->>>>>>> a2a300c3b7f210187340d1065fac842144c24c91
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import stripe
 ###################################### USER ####################################################

@@ -14,8 +14,8 @@ body {
     background-size: 1336px;
     width: 1336px;
     height: 350px;
-    margin-top: 0px;
-    padding-top: 10px;
+    margin-top: 50px;
+    padding-top: 80px;
     padding-bottom: 400px;
 }
 
@@ -55,7 +55,7 @@ body {
       border-style: solid;
       color: white;
       border-radius: 10px;
-      background-color: brown;
+      background-color: #D9534F;
       padding: 20px;
       margin-top: 40px;
    }
