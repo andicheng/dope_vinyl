@@ -21,13 +21,15 @@
     <form id="search_form" action="" method="Post">
         <input id="search_bar" type='search' name="search" placeholder="Search">
     </form>
-
-     <select id="dropdown" class="custom-select" name="sort" onchange="form.submit()">
-        <option value="showall">Show All</option>
-        <option value="process">Order in Process</option>
-        <option value="cancelled">Cancelled</option>
-        <option value="shipped">Shipped</option>
-     </select>
+    <form name="prod_filter" id="dropdown"  method="POST">
+   {% csrf_token %}
+        <select name="prod_filter" onchange="form.submit()">
+           <option value="showall" {% if prod_filter == 'showall' %}selected{% endif %}>Show All</option>
+           <option value="Order in Process" {% if prod_filter == 'Order in Process' %}selected{% endif %}>Order in Process</option>
+           <option value="cancelled" {% if prod_filter == 'cancelled' %}selected{% endif %}>Cancelled</option>
+           <option value="shipped" {% if prod_filter == 'shipped' %}selected{% endif %}>Shipped</option>
+        </select>
+    </form>
      <!-- testing ... -->
      {% if messages %}
        {% for msg in messages %}
@@ -45,43 +47,13 @@
                <th id="total">Total</th>
                <th id="status">Status</th>
             </tr>
-            <tr>
-               <td>1</td>
-               <td>Bob</td>
-               <td>10/20/2016</td>
-               <td>1234 Easter Lane WA 98765</td>
-               <td>$200</td>
-               <td>
-                    <select class="custom-select" name="sort" onchange="form.submit()">
-                        <option value="process">Order in Process</option>
-                        <option value="cancelled">Cancelled</option>
-                        <option value="shipped">Shipped</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Bob</td>
-                <td>10/20/2016</td>
-                <td>1234 Easter Lane WA 98765</td>
-                <td>$200</td>
-                <td>
-                    <select class="custom-select" name="sort" onchange="form.submit()">
-                        <option value="process">Order in Process</option>
-                        <option value="cancelled">Cancelled</option>
-                        <option value="shipped">Shipped</option>
-                    </select>
-                </td>
-            </tr>
             {% for order in orders %}
             <tr>
-                <td>{{order.id}}</td>
+                <td><a href="/dashboard/orders/show/{{order.id}}">{{order.id}}</a></td>
                 <td>{{order.billing.bill_first_name}}</td>
                 <td>{{order.billing.created_at}}</td>
-                <td>{{order.billing.bill_address1}}<br>
-                {{order.billing.bill_address2}}
-                </td>
-                <td>{{order.total}}</td>
+                <td>{{order.billing.bill_address1}}, {{order.billing.bill_address2}} {{order.billing.bill_state}} {{order.billing.bill_zip}}</td>
+                <td>${{order.total}}</td>
                 <td>
                     <select class="custom-select" name="sort" onchange="form.submit()">
                         <option value="process">Order in Process</option>

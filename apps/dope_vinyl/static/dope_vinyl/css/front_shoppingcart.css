@@ -49,6 +49,11 @@ table {
         margin: 20px 0px 5px 0px;
     }
 
+
+    tr:nth-child(odd) {
+        background-color: #e6f2ff
+    }
+
     #continue_shopping_button {
         text-align: right;
         margin-left: 805px;

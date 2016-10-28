@@ -2,7 +2,7 @@ from django.conf.urls import url
 from . import views
 urlpatterns = [
 
-    ########################## HOME #####################################    
+    ########################## HOME #####################################
     url(r'^$', views.home),
     url(r'^show$', views.home),
 
@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^front_productpage/show/(?P<id>\d+)$', views.front_productpage, name="product_page"),
     url(r'^front_productpage/buy/(?P<id>\d+)$', views.buy),
     url(r'^carts$', views.carts),
+    url(r'^deletecart_item/(?P<key_id>\d+)$', views.deletecart_item),
     url(r'^checkout$', views.checkout),
     url(r'^billing_shipping$', views.billing_shipping),
 
@@ -30,7 +31,7 @@ urlpatterns = [
     url(r'^dashboard/products/edit/(?P<id>\d+)$', views.products_edit),
     url(r'^dashboard/products/delete/(?P<id>\d+)$', views.products_delete),
     url(r'^dashboard/orders$', views.orders),
-    url(r'^dashboard/orders/show$', views.show_orders),
+    url(r'^dashboard/orders/show/(?P<id>\d+)$', views.show_orders),
 
 
 

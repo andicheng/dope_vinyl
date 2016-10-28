@@ -13,9 +13,12 @@ def front_allproducts(request):
     try:
         sort=request.POST['sort']
     except:
-        sort='title'
-    if request.method == 'POST':
-        products = Product.objects.filter(title__contains=request.POST['search_title'])
+        sort = 'title'
+    if request.method=='GET':
+        try:
+            products = Product.objects.filter(title__contains=request.GET['search_title'])
+        except:
+            products = Product.objects.all().order_by(sort)
     else:
         products = Product.objects.all().order_by(sort)
     paginator = Paginator(products,15)
@@ -41,8 +44,14 @@ def front_allproducts_cat(request, id):
     try:
         sort=request.POST['sort']
     except:
-        sort='title'
-    products = Product.objects.filter(genre=id)
+        sort = 'title'
+    if request.method=='GET':
+        try:
+            products = Product.objects.filter(genre=id).filter(title__contains=request.GET['search_title'])
+        except:
+            products = Product.objects.filter(genre=id).order_by(sort)
+    else:
+        products = Product.objects.filter(genre=id).order_by(sort)
     paginator = Paginator(products,15)
     page = request.GET.get('page')
     try:
@@ -57,7 +66,6 @@ def front_allproducts_cat(request, id):
         'genres' : genres,
     }
     return render(request, "dope_vinyl/front_allproducts.html", context)
-
 def front_productpage(request, id):
     cart = request.session.get('cart', {})
     length = sum(cart.values())
@@ -109,6 +117,17 @@ def carts(request):
     }
     return render(request, "dope_vinyl/front_shoppingcart.html", context)
 
+def deletecart_item(request, key_id):
+    cart = request.session.get('cart', {})
+    new_cart = {}
+    for key,value in cart.items():
+        if key != key_id:
+            new_cart[key] = value
+
+    request.session['cart'] = new_cart
+
+    return redirect('/carts')
+
 def billing_shipping(request):
     if request.method == "POST":
         stripe.api_key = "sk_test_MtYKfrdjHXRPAAuSul1W5m5B"
@@ -130,14 +149,10 @@ def billing_shipping(request):
                 sum_total += the_price
 
             shipping = Shipping.objects.create(ship_first_name=request.POST['ship_first_name'], ship_last_name=request.POST['ship_last_name'], ship_address1=request.POST['ship_address1'], ship_address2=request.POST['ship_address2'], ship_city=request.POST['ship_city'], ship_state=request.POST['ship_state'], ship_zip=request.POST['ship_zip'])
-            print shipping
-            print "*********"
+
             billing = Billing.objects.create(bill_first_name=request.POST['bill_first_name'], bill_last_name=request.POST['bill_last_name'], bill_address1=request.POST['bill_address1'], bill_address2=request.POST['bill_address2'], bill_city=request.POST['bill_city'], bill_state=request.POST['bill_state'], bill_zip=request.POST['bill_zip'])
-            print billing
-            print "*********"
+
             order = Order.objects.create(shipping=shipping, billing=billing, total=sum_total, status="Order In Process")
-            print order
-            print "*********"
 
             for product,quantity,total_price in cart_list:
                 Product_orders.objects.create(orders=order, products=product, quantity=quantity)
@@ -193,20 +208,36 @@ def orders(request):
         messages.error(request, "Gotta login bro.")
         return redirect('/adminlogin')
 
-    all_shipments = Shipping.objects.all().order_by('-id')
-    all_billings = Billing.objects.all()
+    try:
+        sort=request.POST['sort']
+    except:
+        sort = 'title'
+    if request.method=='GET':
+        try:
+            products = Product.objects.filter(title__contains=request.GET['search_title'])
+        except:
+            products = Product.objects.all().order_by(sort)
+    else:
+        products = Product.objects.all().order_by(sort)
+    # if request.method == "POST" & request.POST['prod_filter']=="showall":
+    #     orders = Order.objects.all()
+    #     prod_filter="showall"
+    # else:
+    #     prod_filter=request.POST['prod_filter']
+        # orders = Order.objects.filter(status=prod_filter)
+    orders = Order.objects.all().order_by("-id")
 
     context = {
         'admin': Admin.objects.get(id=request.session['logged_admin']),
-        'all_shipments': all_shipments,
-        'all_billings': all_billings
+        'orders': orders,
+        # 'prod_filter' : prod_filter,
     }
 
     return render(request, 'dope_vinyl/dashboard_allorders.html', context)
 
 
 #INDIVIDUAL ORDER ON ADMIN PAGE.
-def show_orders(request):
+def show_orders(request, id):
     if 'logged_admin' not in request.session:
         messages.error(request, "Gotta login bro")
         return redirect('/adminlogin')

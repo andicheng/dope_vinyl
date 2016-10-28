@@ -13,7 +13,7 @@
               <a href="/carts">Shopping Cart ({{length}})</a>
         </div>
         <div id="left_box">
-            <form class="" action="front_allproducts" name="search_title" method="POST">
+            <form class="" action="front_allproducts" name="search_title" method="GET">
                 {% csrf_token %}
                 <input type="text" name="search_title" placeholder="product_name">
                 <input type="submit" value="&#x1f50e;">
