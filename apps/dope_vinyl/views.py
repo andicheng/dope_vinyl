@@ -3,10 +3,15 @@ from django.contrib import messages
 <<<<<<< HEAD
 from .models import Product, Genre, Artist, Admin, Order, Billing, Shipping, Product_orders
 =======
+<<<<<<< HEAD
 
 from .models import Product, Genre, Artist, Admin, Order, Billing, Shipping, Product_orders
 >>>>>>> 7f50cc367935de052c03e6b9a098399ffef068f3
 >>>>>>> 7fe2e6efd6493554c27228bbaad24ed7cbb60e10
+=======
+from .models import Product, Genre, Artist, Admin, Order, Shipping, Billing
+>>>>>>> a2a300c3b7f210187340d1065fac842144c24c91
+>>>>>>> parent of 5346222... styled all the pages now so it's uniformed.
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import stripe
 ###################################### USER ####################################################

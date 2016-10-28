@@ -6,24 +6,18 @@
         <title>All Products</title>
         <!-- <link rel="stylesheet" href="./../css/front_allproducts.css" media="screen" title="no title"> -->
         <link rel="stylesheet" href="{% static '/dope_vinyl/css/front_allproducts.css' %}" media="screen" title="no title">
-        <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
     </head>
     <body>
         <div id="nav_bar">
-            <h3 id="h3">Dope.</h3>
+            <h3>Dope Vinyl</h3>
               <a href="/carts">Shopping Cart ({{length}})</a>
         </div>
         <div id="left_box">
-
-            <form action="front_allproducts" name="search_title" method="POST">
+            <form class="" action="front_allproducts" name="search_title" method="POST">
                 {% csrf_token %}
-                <input id="search_field" type="text" name="search_title" placeholder="Search by Album">
-                <input id="search_submit" type="submit" value="&#x1f50e;">
+                <input type="text" name="search_title" placeholder="product_name">
+                <input type="submit" value="&#x1f50e;">
             </form>
-
             <h4>Categories</h4>
             <ul>
                {% for genre in genres %}
@@ -34,15 +28,7 @@
         </div>
         <div id="main">
             <div id="main_top">
-                <form id="sort" name="sort" method="POST">
-                   {% csrf_token %}
-                        <select name="sort" class="custom-select" onchange="form.submit()">
-                           <option value="title" {% if sort_current == 'title' %}selected{% endif %}>Title</option>
-                           <option value="artist" {% if sort_current == 'artist' %}selected{% endif %}>Artist Name</option>
-                           <option value="price" {% if sort_current == 'price' %}selected{% endif %}>Price</option>
-                           <option value="popularity" {% if sort_current == 'popularity' %}selected{% endif %}>Most Popular</option>
-                        </select>
-                </form>
+                <h2>{{genres.genre}} Page {{products.number}}</h2>
                 <div id="pagination1">
                   <span class="step-links">
                      {% if products.has_previous %}
@@ -60,6 +46,15 @@
                      {% endif %}
                   </span>
                </div>
+                <span id="sort">Sorted by </span><form name="sort" method="POST">
+                   {% csrf_token %}
+                        <select name="sort" onchange="form.submit()">
+                           <option value="title" {% if sort_current == 'title' %}selected{% endif %}>Title</option>
+                           <option value="artist" {% if sort_current == 'artist' %}selected{% endif %}>Artist Name</option>
+                           <option value="price" {% if sort_current == 'price' %}selected{% endif %}>Price</option>
+                           <option value="popularity" {% if sort_current == 'popularity' %}selected{% endif %}>Most Popular</option>
+                        </select>
+                </form>
             </div>
             <div id="records">
                <ul id="main_thumbnails">

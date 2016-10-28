@@ -1,5 +1,5 @@
 html {
-    width: 1336px;
+    width: 960px;
     margin: auto;
     font-family: helvetica;
 }
@@ -7,16 +7,13 @@ html {
 #nav_bar {
     background-color: #565656;
     color: white;
+    margin-bottom: 25px;
 }
 
-    #h3 {
-        font-family: 'Pacifico', cursive;
+    h3 {
         display: inline-block;
-        margin-top: 15px;
-        margin-bottom: 25px;
-        margin-left: 50px;
-        margin-right: 1050px;
-        font-size: 30px;
+        margin-left: 25px;
+        margin-right: 610px;
     }
 
     #nav_bar a {
@@ -28,31 +25,18 @@ html {
     }
 
 #go_back {
-    margin-top: 10px;
-    margin-left: 100px;
-    font-size: 16px;
+    margin-left: 25px;
 }
 
-    #go_back a {
-        font-size: 18px;
-    }
-
-#h2 {
-    margin-top: 10px;
-    margin-left: 100px;
+h2 {
+    margin-left: 25px;
 }
 
-#thumbnail{
+#thumbnail {
     display: inline-block;
-    margin-top: 25px;
-    margin-left: 100px;
-}
-
-#thumbnail img{
-    display: inline-block;
-    margin-left: 100px;
-    width: 500px;
-    height: 500px;
+    margin-left: 25px;
+    width: 300px;
+    height: 300px;
 }
 
 #content {
@@ -66,7 +50,7 @@ html {
         vertical-align: top;
         width: 480px;
         height: 400px;
-        margin-top: 25px;
+        margin-top: 0px;
         margin-left: 80px;
         line-height: 23px;
         overflow: scroll;
@@ -78,57 +62,46 @@ html {
         vertical-align: top;
         width: 450px;
         margin-top: 0px;
-        margin-left: 365px;
+        margin-left: 375px;
         font-size: 13px;
         padding: 3px;
     }
-
-    #content form .custom-select{
-        padding-left: 20px;
-        padding-right: 35px;
-    }
-
     #content input{
       font-size: 13px;
+      background-color: #3399ff;
       color: white;
-      padding: 10px 30px
    }
 
-#h4 {
-    margin-top: 25px;
-    margin-left: 100px;
+h4 {
+    margin-left: 25px;
     padding: 0px;
 }
 
 ul {
     margin-left: 35px;
     padding: 0px;
-    margin-bottom: 5px;
+   margin-bottom: 5px;
 }
 
 li {
+    border: 1px solid black;
     display: inline-block;;
     list-style: none;
     width: 120px;
     height: 120px;
     vertical-align: top;
 }
-
-#similar_items{
-    margin-left: 100px;
-}
-
-img.similar{
+img#similar{
    width: 120px;
    height: 120px;
    margin-bottom: 5px;
 }
-
-.similar{
+#similar{
+   margin-top: : 10px;
    padding: 0px;
    font-size: 12px;
    display: block;
-   height: 120px;
+   height: 155px;
    width: 120px;
    text-decoration: none;
    color: black;
