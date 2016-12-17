@@ -19,56 +19,55 @@
         </div>
         <div id="content">
             <div id="address">
-              {% for order in customerorder %}
-                <h6>Order ID: {{order.id}}</h6>
+                <h6>Order ID: {{info.orders.id}}</h6>
                 <div class='address'>
                     <h6>Customer Shipping Info:</h6>
-                    <p>Name: {{order.orders.shipping.ship_first_name}}</p>
-                    <p>Address: {{order.orders.shipping.ship_address1}}</p>
-                    <p>City: {{order.orders.shipping.ship_city}}</p>
-                    <p>State: {{order.orders.shipping.ship_state}}</p>
-                    <p>Zip: {{order.orders.shipping.ship_zip}}</p>
+                    <p>Name: {{info.orders.shipping.ship_first_name}}</p>
+                    <p>Address: {{info.orders.shipping.ship_address1}}</p>
+                    <p>City: {{info.orders.shipping.ship_city}}</p>
+                    <p>State: {{info.orders.shipping.ship_state}}</p>
+                    <p>Zip: {{info.orders.shipping.ship_zip}}</p>
                 </div>
                 <div class="address">
                     <h6>Customer Billing Info:</h6>
-                    <p>Name: {{order.orders.billing.bill_first_name}}</p>
-                    <p>Address: {{order.orders.billing.bill_address1}}</p>
-                    <p>City: {{order.orders.billing.bill_city}}</p>
-                    <p>State: {{order.orders.billing.bill_state}}</p>
-                    <p>Zip: {{order.orders.billing.bill_zip}}</p>
-                </div>
-                {% endfor %}
-            </div>
-         <div id='order'>
-            <table>
-               <tr>
-                  <th>ID</th>
-                  <th>Item</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Total</th>
-               </tr>
-               {% for product in products_in_order %}
-               <tr>
-                  <td>{{product.products.id}}</td>
-                  <td>{{product.products.title}}</td>
-                  <td>{{product.products.price}}</td>
-                  <td>{{product.quantity}}</td>
-                  <td>${{product.products.price}}*{{product.products.quantity}}</td>
-               </tr>
-               {% endfor %}
-            </table>
-            <div id="lower_order">
-              {% for product in products_in_order %}
-            <p id="status">Status: {{order.status}}</p>
-                <div id="charges">
-                   <p>Sub total: ${{product.products.price}}*{{product.products.order.quantity}}</p>
-                   <p>Shipping: ${{product.products.order.shipping}}</p>
-                   <p>Total Price: ${{product.products.price}}*{{product.products.order.quantity}}+{{product.order.shipping}}</p>
-              {% endfor %}
+                    <p>Name: {{info.orders.billing.bill_first_name}}</p>
+                    <p>Address: {{info.orders.billing.bill_address1}}</p>
+                    <p>City: {{info.orders.billing.bill_city}}</p>
+                    <p>State: {{info.orders.billing.bill_state}}</p>
+                    <p>Zip: {{info.orders.billing.bill_zip}}</p>
                 </div>
             </div>
-        </div>
-      </div>
-   </div>
-</body>
+
+            <div id='order'>
+                       <table>
+                          <tr>
+                             <th>Prod ID</th>
+                             <th>Item</th>
+                             <th>Price</th>
+                             <th>Quantity</th>
+                             <th>Total</th>
+                          </tr>
+                          {% for product in products_in_order %}
+                          <tr>
+                             <td>{{product.products.id}}</td>
+                             <td>{{product.products.title}}</td>
+                             <td>{{product.products.price}}</td>
+                             <td>{{product.quantity}}</td>
+                             <td>${{product.total}}</td>
+                          </tr>
+                          {% endfor %}
+                       </table>
+                       <div id="lower_order">
+                         {% for product in products_in_order %}
+                       <p id="status">Status: {{product.orders.status}}</p>
+                           <div id="charges">
+                              <p>Sub total: ${{totaltotal}}</p>
+                              <p>Shipping: ${{shiptax}}</p>
+                              <p>Total Price: ${{finaltotal}}</p>
+                         {% endfor %}
+                           </div>
+                       </div>
+                   </div>
+                 </div>
+              </div>
+            </body>

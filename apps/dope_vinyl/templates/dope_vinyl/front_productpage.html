@@ -35,7 +35,7 @@
             <form mane='frm' action="/front_productpage/buy/{{product.id}}" method="post">
                 {% csrf_token %}
                 <select class="custom-select">
-                    <option value="1">1 ${{product.price}}</option>
+                    <option value="1">${{product.price}}</option>
                     <!-- <option value="2">2  ${{product.price}}</option>
                     <option value="3">3  ${{product.price}}</option> -->
                 </select>

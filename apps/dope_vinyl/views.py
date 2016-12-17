@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
+from django.db.models import F, Sum
 from .models import Product, Genre, Artist, Admin, Order, Billing, Shipping, Product_orders
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import stripe
@@ -17,7 +18,7 @@ def front_allproducts(request):
         sort = 'title'
     if request.method=='GET':
         try:
-            products = Product.objects.filter(title__contains=request.GET['search_title'])
+            products = Product.objects.filter(title__contains=request.GET['search_title']) | Product.objects.filter(artist__name__contains=request.GET['search_title']) |Product.objects.filter(price__contains=request.GET['search_title'])
         except:
             products = Product.objects.all().order_by(sort)
     else:
@@ -67,6 +68,7 @@ def front_allproducts_cat(request, id):
         'products' : products,
         'sort_current' : sort,
         'genres' : genres,
+        'length' : length
     }
     return render(request, "dope_vinyl/front_allproducts.html", context)
 
@@ -96,7 +98,7 @@ def buy(request, id):
 
     else:
         cart[product_id] += 1
-        messages.success(request, "Item added again... you must really like this dope vinyl.")
+        messages.success(request, "Again? You must really like this dope vinyl.")
     request.session['cart'] = cart
 
     return redirect('product_page', id=product.id)
@@ -211,12 +213,10 @@ def orders(request):
     if 'logged_admin' not in request.session:
         messages.error(request, "Gotta login bro.")
         return redirect('/adminlogin')
-
     try:
         pfilter=request.POST['pfilter']
     except:
         pfilter = 'showall'
-
     if request.method=='GET':
         try:
             orders = Order.objects.filter(billing__bill_first_name__contains=request.GET['search']).order_by("-id") | Order.objects.filter(billing__bill_address1__contains=request.GET['search']).order_by("-id") | Order.objects.filter(status__contains=request.GET['search']).order_by("-id") | Order.objects.filter(total__contains=request.GET['search']).order_by("-id") | Order.objects.filter(id__contains=request.GET['search']).order_by("-id")
@@ -230,7 +230,6 @@ def orders(request):
             orders = Order.objects.all().order_by("-id")
         else:
             orders = Order.objects.filter(status=pfilter).order_by("-id")
-
     context = {
         'admin': Admin.objects.get(id=request.session['logged_admin']),
         'orders': orders,
@@ -238,21 +237,44 @@ def orders(request):
     }
     return render(request, 'dope_vinyl/dashboard_allorders.html', context)
 
+def order_status(request, id):
+    if request.method=='POST':
+        status = request.POST['status']
+        Order.objects.filter(id=id).update(status=status)
+        return redirect("/dashboard/orders")
+    return redirect("/dashboard/orders")
+
 #INDIVIDUAL ORDER ON ADMIN PAGE.
 def show_orders(request, id):
-    if 'logged_admin' not in request.session:
-        messages.error(request, "Gotta login bro")
-        return redirect('/adminlogin')
-    customerorder = Product_orders.objects.filter(id=id)
-    products_in_order = Product_orders.objects.filter(orders=id)
-    print customerorder.query
-    context = {
-        'admin' : Admin.objects.get(id=request.session['logged_admin']),
-        'customerorder' : customerorder,
-        'products_in_order' : products_in_order
-    }
+   if 'logged_admin' not in request.session:
+       messages.error(request, "Gotta login bro")
+       return redirect('/adminlogin')
+   customerorder = Product_orders.objects.filter(id=id)
+   info = Product_orders.objects.filter(orders=id)[0]
+   products_in_order = Product_orders.objects.filter(orders=id).annotate(total=Sum(F('products__price') * F('quantity')))
+   print products_in_order.query
 
-    return render(request, 'dope_vinyl/dashboard_showorder.html', context)
+   totaltotal = 0
+   for item in products_in_order:
+       price = item.products.price
+       quantity = item.quantity
+       totaltotal += price * quantity
+       print price * quantity
+       print item.total
+   shiptax = int(7)
+   finaltotal = totaltotal + shiptax
+
+   context = {
+       'admin' : Admin.objects.get(id=request.session['logged_admin']),
+       'customerorder' : customerorder,
+       'products_in_order' : products_in_order,
+       'shiptax' : shiptax,
+       'finaltotal': finaltotal,
+       'totaltotal': totaltotal,
+       'info': info
+   }
+
+   return render(request, 'dope_vinyl/dashboard_showorder.html', context)
 
 #ALL PRODUCTS ON ADMIN PAGE. CLICK ON ADD NEW PRODUCT TO TAKE YOU TO ADD/EDIT ROUTE.
 

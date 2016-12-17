@@ -32,5 +32,5 @@ urlpatterns = [
     url(r'^dashboard/products/delete/(?P<id>\d+)$', views.products_delete),
     url(r'^dashboard/orders$', views.orders),
     url(r'^dashboard/orders/show/(?P<id>\d+)$', views.show_orders),
-
+    url(r'^dashboard/orders/order_status/(?P<id>\d+)$', views.order_status),
 ]

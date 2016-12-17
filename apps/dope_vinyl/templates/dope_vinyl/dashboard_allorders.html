@@ -57,11 +57,14 @@
                 <td>{{order.billing.bill_address1}}, {{order.billing.bill_address2}} {{order.billing.bill_state}} {{order.billing.bill_zip}}</td>
                 <td>${{order.total}}</td>
                 <td>
-                    <select class="custom-select" name="sort" onchange="form.submit()">
-                        <option value="process">Order in Process</option>
-                        <option value="cancelled">Cancelled</option>
-                        <option value="shipped">Shipped</option>
-                    </select>
+                  <form name="status" action="/dashboard/orders/order_status/{{order.id}}" method="POST">
+                     {% csrf_token %}
+                       <select class="custom-select" onchange="form.submit()" name="status">
+                           <option value="Order In Process" {% if order.status == "Order In Process" %}selected{% endif %}>Order in Process</option>
+                           <option value="Cancelled" {% if order.status == "Cancelled" %}selected{% endif %}>Cancelled</option>
+                           <option value="Shipped" {% if order.status == "Shipped" %}selected{% endif %}>Shipped</option>
+                       </select>
+                   </form>
                 </td>
             </tr>
             {% endfor %}

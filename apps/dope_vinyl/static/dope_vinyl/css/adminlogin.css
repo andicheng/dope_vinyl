@@ -33,3 +33,7 @@ html {
         margin: 10px 0px 0px 685px;
         padding: 10px 55px;
     }
+#center_message{
+  text-align: center;
+  color: red;
+}

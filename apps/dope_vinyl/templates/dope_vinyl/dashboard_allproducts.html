@@ -35,7 +35,7 @@
                <th>Title</th>
                <th>Price</th>
                <th>Inventory Count</th>
-               <th>Quantity Sold</th>
+               <!-- <th>Quantity Sold</th> -->
                <th>Action</th>
             </tr>
             {% for product in all_products %}
@@ -45,7 +45,7 @@
                 <td>{{product.title}}</td>
                 <td>${{product.price}}</td>
                 <td>{{product.inventory}}</td>
-                <td>{{product.quantity}}</td>
+                <!-- <td>{{product.quantity</td> -->
                 <td><a data-toggle="modal" href="#product{{product.id}}"><button type="button" class="btn btn-danger">Edit</button></a> | <a href="products/delete/{{product.id}}"><button type="button" class="btn btn-danger">Delete</button></a></td>
             </tr>
             {% endfor %}

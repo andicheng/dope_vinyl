@@ -20,7 +20,7 @@
         <div id="left_box">
             <form class="" action="front_allproducts" name="search_title" method="GET">
                 {% csrf_token %}
-                <input id="search" type="text" name="search_title" placeholder="Search by Title">
+                <input id="search" type="text" name="search_title" placeholder="Search">
                 <input type="submit" value="&#x1f50e;">
             </form>
             <h4>Categories</h4>
@@ -38,7 +38,7 @@
                         <select class="custom-select" name="sort" onchange="form.submit()">
                            <option value="title" {% if sort_current == 'title' %}selected{% endif %}>Title</option>
                            <option value="artist" {% if sort_current == 'artist' %}selected{% endif %}>Artist Name</option>
-                           <option value="price" {% if sort_current == 'price' %}selected{% endif %}>Price</option>
+                           <option value="price" {% if sort_current == 'price' %}selected{% endif %}>Price (L-H)</option>
                         </select>
                 </form>
                 <div id="pagination1">
